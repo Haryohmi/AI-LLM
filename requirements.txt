@@ -1,0 +1,9 @@
+youtube-transcript-api
+pytube 
+
+langchain_core
+langchain_chroma
+langchain_google_genai
+langchain_google_genai
+langchain
+langchain-community
