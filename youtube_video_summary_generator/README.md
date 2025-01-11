@@ -63,15 +63,16 @@ The video discusses recognizing God-ordained marriages through spiritual signs a
 
 Response:
 The main takeaway is the speaker's emphasis on aligning spiritual and earthly marriage to maintain divine favor.
-Project Structure
+
+# Project Structure
 main.py: Entry point for the program.
 tools.py: Contains the pipeline and utility functions for transcript extraction and summarization.
 requirements.txt: Lists the dependencies required for the project.
 metadata.json: Describes the project inputs and functionality.
-Known Issues
+# Known Issues
 Videos without transcripts or private videos are not supported.
 Follow-up questions may generate verbose responses if the input is vague.
-Contributing
+# Contributing
 Fork the repository.
 Create a feature branch:
 bash
@@ -79,7 +80,5 @@ Copy code
 git checkout -b feature-name
 Commit and push your changes.
 Create a pull request.
-License
-This project is licensed under the MIT License. See the LICENSE file for more details.
 
 Let me know if you'd like to customize this further! 😊
