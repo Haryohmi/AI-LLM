@@ -1,0 +1,34 @@
+{
+    "name": "youtube_video_summary_generator",
+    "description": "Generate concise, structured summary from YouTube video transcripts.",
+    "inputs": [
+        {
+            "label": "YouTube Video URL",
+            "name": "video_url",
+            "type": "text",
+            "required": true,
+            "description": "Enter the URL of the YouTube video to extract the transcript from."
+        },
+        {
+            "label": "Video ID",
+            "name": "video_id",
+            "type": "text",
+            "required": true,
+            "description": "Enter the ID of the YouTube video."
+        },
+        {
+            "label": "Prompt",
+            "name": "prompt",
+            "type": "text",
+            "required": false,
+            "description": "Enter a specific topic or focus for the notes generation."
+        },
+        {
+            "label": "Language",
+            "name": "lang",
+            "type": "text",
+            "required": false,
+            "description": "Enter the language for the notes generation."
+        }
+    ]
+}
