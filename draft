@@ -1,5 +1,0 @@
-write a program that takes youtube url as input 
-Then extract the video transcript 
-
-Tasks 
-1. I wrote the function to get_video_transcript after validating the availability of the video and check_transcript_availability
