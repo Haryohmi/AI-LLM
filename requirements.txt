@@ -1,5 +1,4 @@
 youtube-transcript-api
-pytube 
 
 langchain_core
 langchain_chroma
