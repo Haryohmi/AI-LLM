@@ -4,9 +4,8 @@ This project provides a pipeline to extract transcripts from YouTube videos, sum
 # Features
 - YouTube Transcript Extraction: Fetches transcripts from public YouTube videos.
 - Summarization: Generates concise summaries tailored to user-provided prompts.
-- Follow-Up Questions: Enables interactive querying of the summary for additional insights.
+- Optional Follow-Up Questions: Enables interactive querying of the summary for additional insights.
 - Multilingual Support: Summaries can be generated in the language specified by the user. (To be implemented)
-- Persistence with ChromaDB: Stores transcript data for efficient retrieval and summarization.
 
 # Installation
 
