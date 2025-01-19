@@ -30,28 +30,25 @@ def main(
         # Generate summary
         summary = pipeline.generate_summary(docs)
         logger.info("summary generation completed successfully.")
-        print("Generated summary:")
-        print(summary)
-        return {"status": "success", "summary": summary}
+        print(f"status: success, Generated summary: {summary}")
+    
+        # Interactive follow-up loop
+        while True:
+            print("\nSuggested Questions:")
+            print("1. What are the key takeaways?")
+            print("2. Can you explain the main ideas?")
+            print("3. What insights can I derive from this?")
+            print("Type 'exit' to quit.")
+            
+            follow_up = input("\nEnter your follow-up question: ").strip()
+            if follow_up.lower() == "exit":
+                print("Thank you for using the Note Generator. Goodbye!")
+                break
 
-        # Allow follow-up questions - This feature is optional
-        # while True:
-        #     follow_up = input("\nEnter a follow-up question (or type 'exit' to quit): ").strip()
-        #     if follow_up.lower() == "exit":
-        #         print("Thank you for using the Note Generator. Goodbye!")
-        #         break
-
-        #     # Refine the query with the follow-up question
-        #     refined_prompt = f"{summary}\nUser question: {follow_up}"
-        #     response = pipeline.model.invoke([f"Answer the question based on the summary: {refined_prompt}"])
-        #     # Extract the response content
-        #     if isinstance(response, dict) and 'content' in response:
-        #         print("\nResponse:")
-        #         print(response['content'])
-        #     else:
-        #         print("\nResponse:")
-        #         print(response)  # Fallback if response is plain text
-        #         return {"status": "success", "summary": summary}
+            # Generate follow-up response
+            follow_up_response = pipeline.follow_up_query(summary, follow_up)
+            print(f"\nResponse: {follow_up_response}")
+            #print(f"\nResponse: {follow_up_response['content']}")
 
     except VideoTranscriptError as e:
         logger.error(f"Transcript error: {e}")
@@ -66,5 +63,7 @@ if __name__ == "__main__":
     result = main(video_url, video_id, prompt, lang)
     if result["status"] == "success":
         print("summary:", result["summary"])
+        if result["follow_up_response"]:
+            print("follow_up_response:", result["follow_up_response"])
     else:
         print("Error:", result["message"])

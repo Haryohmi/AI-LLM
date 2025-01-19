@@ -12,7 +12,6 @@ from langchain.chains.summarize.chain import load_summarize_chain
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-
 class VideoTranscriptError(Exception):
     """Custom exception for video transcript loading errors."""
     def __init__(self, message, youtube_url):
@@ -31,6 +30,7 @@ class NoteGeneratorPipeline:
         self.embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")  # Initialize embeddings
         self.vectorstore = None
         self.retriever = None
+        self.cache = {}
 
     def load_docs_youtube_url(self, youtube_url: str, verbose=True) -> List[Document]:
         """
@@ -86,5 +86,58 @@ class NoteGeneratorPipeline:
 
         # Combine summaries
         return doc_summary or text_summary or "No content to summarize."
-        
+    
+    def follow_up_query(self, summary: str, follow_up:str) -> str:
+        """
+        To generate response to follow-up questions based on the generated summary, if needed 
+        give options like, "what are the main points? what are the key takeaways" etc.
+        combine the general_summary with the follow-up question and generate response
 
+        Args:
+        summary (str): The initial summary of the video content.
+        follow_up (str): The user's follow-up question.
+    
+        Returns:
+            str: The refined response to the follow-up question.
+        """
+
+        if not summary.strip():
+            return "No summary available. Please generate a summary first."
+
+        if not follow_up.strip():
+            return "No follow-up question provided."
+
+        # Generate cache key
+        cache_key = f"{summary}-{follow_up}"
+
+        # Check if response is cached
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+
+        
+        try:
+            # Generate response if not cached
+            refined_prompt = f"Summary:\n{summary}\n\nFollow-Up Question: {follow_up}"
+            #Generate a response using the LLM
+            response = self.model.invoke([f"Answer the question based on the summary: {refined_prompt}"])
+            
+            # Process the response
+            if isinstance(response, dict) and 'content' in response:
+                content = response['content'].strip()
+                if not content:
+                    return "The question was unclear. Please try asking a specific question, such as 'What are the main points?' or 'What insights can I derive from this?'"
+                self.cache[cache_key] = content  # Cache meaningful response
+                return content
+
+            # If response is not a dictionary, return it directly (assuming plain text)
+            response_text = str(response).strip()
+            if not response_text:
+                return "The response was empty. Please refine your question."
+            self.cache[cache_key] = response_text  # Cache plain text response
+            return response_text
+        
+            
+
+        except Exception as e:
+            logger.error(f"Error generating follow-up response: {e}")
+            return "Failed to generate a response to the follow-up question."
