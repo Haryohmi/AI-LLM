@@ -47,8 +47,8 @@ def main(
 
             # Generate follow-up response
             follow_up_response = pipeline.follow_up_query(summary, follow_up)
+            #print(f"\nResponse: {follow_up_response}")
             print(f"\nResponse: {follow_up_response}")
-            #print(f"\nResponse: {follow_up_response['content']}")
 
     except VideoTranscriptError as e:
         logger.error(f"Transcript error: {e}")

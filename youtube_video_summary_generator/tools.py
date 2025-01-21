@@ -7,10 +7,13 @@ from langchain_chroma import Chroma
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.chains.summarize.chain import load_summarize_chain
+from langchain.schema import StrOutputParser, AIMessage
+
 
 # Configure Logger
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+
 
 class VideoTranscriptError(Exception):
     """Custom exception for video transcript loading errors."""
@@ -24,13 +27,22 @@ class NoteGeneratorPipeline:
         self.doc_url = doc_url
         self.video_id = video_id
         self.prompt = prompt
-        #self.prompt = input("Please write your question: ").strip() #update to suggest some questions
         self.lang = lang
         self.model = ChatGoogleGenerativeAI(model="gemini-1.5-pro")  # Initialize LLM
         self.embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")  # Initialize embeddings
         self.vectorstore = None
         self.retriever = None
         self.cache = {}
+        
+        # Initialize output parser
+        self.output_parser = StrOutputParser()  # Ensures only string responses
+
+    def parse_response(self, raw_response):
+        """
+        Use the output parser to extract the string content from the LLM's response.
+        """
+        return self.output_parser.parse(raw_response)
+
 
     def load_docs_youtube_url(self, youtube_url: str, verbose=True) -> List[Document]:
         """
@@ -116,28 +128,24 @@ class NoteGeneratorPipeline:
 
         
         try:
-            # Generate response if not cached
             refined_prompt = f"Summary:\n{summary}\n\nFollow-Up Question: {follow_up}"
-            #Generate a response using the LLM
-            response = self.model.invoke([f"Answer the question based on the summary: {refined_prompt}"])
+            raw_response = self.model.invoke([f"Answer the question based on the summary: {refined_prompt}"])
             
-            # Process the response
-            if isinstance(response, dict) and 'content' in response:
-                content = response['content'].strip()
-                if not content:
-                    return "The question was unclear. Please try asking a specific question, such as 'What are the main points?' or 'What insights can I derive from this?'"
-                self.cache[cache_key] = content  # Cache meaningful response
-                return content
+                # Handle response as AIMessage
+            if isinstance(raw_response, AIMessage):
+                content = raw_response.content.strip()
+            elif isinstance(raw_response, str):
+                content = raw_response.strip()
+            else:
+                return "Unexpected response format. Please refine your question."
 
-            # If response is not a dictionary, return it directly (assuming plain text)
-            response_text = str(response).strip()
-            if not response_text:
-                return "The response was empty. Please refine your question."
-            self.cache[cache_key] = response_text  # Cache plain text response
-            return response_text
+            if not content:
+                return "The question was unclear. Please ask something more specific."
+
+                # Cache the response
+            self.cache[cache_key] = content
+            return content
         
-            
-
         except Exception as e:
             logger.error(f"Error generating follow-up response: {e}")
             return "Failed to generate a response to the follow-up question."
