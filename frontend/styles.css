@@ -1,0 +1,201 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center container */
+.container {
+    width: 80%; /* Increased maximum width */
+    margin: 5vh auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+h1 .youtube-icon {
+    color: red;
+    font-size: 1.5rem;
+}
+
+/* Input groups */
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Text input styling */
+input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    min-width: 200px;
+    max-width: calc(70% - 10px); /* Match the combined width */
+}
+
+/* Input focus effects */
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Button styling */
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #003d80;
+    transform: scale(0.95);
+}
+
+/* Red button for "Get Summary" */
+#getSummaryButton {
+    background-color: #FF4C4C;
+}
+
+/* Summary section */
+#summarySection {
+    margin-top: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the content */
+    gap: 1.5rem;
+}
+
+/* Section headings */
+h2, h3, h4 {
+    color: #333;
+    font-weight: bold;
+    margin: 15px 0;
+    text-align: center; /* Keep headings aligned with the textboxes */
+}
+
+/* Ensure rows align */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+#questionInput {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    min-width: 200px;
+    max-width: calc(70% - 10px); /* Matches the width of the other input boxes */
+}
+
+/* Input focus effects (for consistency) */
+#questionInput:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Hidden section */
+.hidden {
+    display: none !important;
+}
+
+.auto-expand {
+    width: 100%;
+    max-width: calc(70% + 110px); /* Match the width of other input elements */
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    background-color: #fff;
+    white-space: pre-wrap; /* Preserve whitespace and allow wrapping */
+    word-wrap: break-word; /* Break long words */
+    overflow: hidden; /* Prevent scrollbars */
+    line-height: 1.5; /* Match the line height of textareas */
+    min-height: 3rem; /* Minimum height */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Stack inputs and buttons */
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    textarea {
+        max-width: 100%;
+        font-size: 0.9rem;
+    }
+
+    h2, h3, h4 {
+        width: 100%; /* Align with full-width containers */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"] {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
