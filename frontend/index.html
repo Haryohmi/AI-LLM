@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Summary Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GET YOUR <span class="youtube-icon">▶</span> SUMMARY IN ONE CLICK!</h1>
+        <div class="input-group">
+            <input type="text" id="videoUrl" placeholder="Enter your URL here">
+            <button id="getSummaryButton" onclick="getSummary()">Get Summary</button>
+        </div>
+
+        <div id="summarySection" class="hidden">
+            <h2>Summary of the Video</h2>
+            <div id="summary" class="auto-expand" contenteditable="false"></div>
+
+            <h3>Got any questions?</h3>
+            <div class="input-group">
+                <input type="text" id="questionInput" placeholder="Placeholder for question">
+                <button id="askButton" onclick="askQuestion()">ASK</button>
+            </div>
+        </div>
+        <div id="answerSection" class="hidden">
+            <h3>Response</h3>
+            <div id="response" class="auto-expand" contenteditable="false"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
