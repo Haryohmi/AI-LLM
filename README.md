@@ -28,6 +28,7 @@ The **YouTube Video Summary Generator** is an AI-powered application that extrac
 ## 📂 Folder Structure
 AI-LLM/
 │── frontend/                           # Frontend UI files
+
 │   ├── index.html                      # Main interface
 │   ├── script.js                       # Handles API calls
 │   ├── styles.css                      # UI styling
