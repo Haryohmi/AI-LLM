@@ -26,8 +26,21 @@ The **YouTube Video Summary Generator** is an AI-powered application that extrac
 ---
 
 ## 📂 Folder Structure
-AI-LLM/ │── frontend/ # Frontend UI files │ ├── index.html # Main UI page │ ├── script.js # Handles API calls │ ├── styles.css # UI styling │── youtube_video_summary_generator/ # Backend module │ ├── main.py # FastAPI entry point │ ├── api/ # API endpoints │ │ ├── routes.py # Handles API logic │ ├── services/ │ │ ├── pipeline.py # AI-powered processing logic │ ├── metadata/ │ ├── tools/ # Utility tools │── requirements.txt # Dependencies │── README.md # Project documentation
-
+AI-LLM/
+│── frontend/                           # Frontend UI files
+│   ├── index.html                      # Main interface
+│   ├── script.js                       # Handles API calls
+│   ├── styles.css                      # UI styling
+│── youtube_video_summary_generator/    # Backend module
+│   ├── main.py                         # FastAPI entry point
+│   ├── api/                            # API endpoints
+│   │   ├── routes.py                    # Handles API logic
+│   ├── services/
+│   │   ├── pipeline.py                   # AI-powered processing logic
+│   ├── metadata/
+│   ├── tools/                            # Utility tools
+│── requirements.txt                       # Dependencies
+│── README.md                              # Project documentation
 
 ---
 
@@ -62,6 +75,6 @@ AI-LLM/ │── frontend/ # Frontend UI files │ ├── index.html # Main 
 
 The **YouTube Video Summary Generator** showcases **FastAPI, AI-driven text processing, and real-time API handling**—making it a valuable tool for anyone seeking quick insights from videos.  
 
-Would you like to integrate it into your own project or workflow? **Get started today! 🚀**  
+Would you like to integrate it into your own project or workflow? 🚀**  
 
 🙌 **Contributors Welcome!** 🎉
