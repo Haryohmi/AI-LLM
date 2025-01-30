@@ -6,3 +6,7 @@ langchain_google_genai
 langchain_google_genai
 langchain
 langchain_community
+
+fastapi
+uvicorn
+pydantic
